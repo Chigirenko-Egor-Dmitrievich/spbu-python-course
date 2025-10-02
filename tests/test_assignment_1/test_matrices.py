@@ -1,6 +1,7 @@
 import pytest
 from project.assignment_1 import matrices as m
 
+
 def test_check_addition_matrices():
     """Test of checking whether matrices match conditions for matrix addition."""
     m1 = [[1, 1], [2, 2]]

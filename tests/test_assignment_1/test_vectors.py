@@ -2,6 +2,7 @@ import pytest
 from project.assignment_1 import vectors as v
 from math import isclose
 
+
 def test_scalar_product():
     """Scalar product test."""
     v1 = [3, 2, 1]

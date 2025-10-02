@@ -3,7 +3,7 @@ Implementation of vector operations:
 Scalar product of two vectors;
 Vector length calculation;
 Angle between two vectors calculation.
-(Functions are used)
+(Functions are used).
 """
 
 from math import pi, acos
@@ -62,4 +62,8 @@ def angle(vector_1: list[float], vector_2: list[float]) -> float:
     if len(vector_1) != len(vector_2):
         raise ValueError("Error: Vectors lengths are not equal")
 
-    return (180 * acos(scalar_product(vector_1, vector_2) / length(vector_1) / length(vector_2)) / pi)
+    return (
+        180
+        * acos(scalar_product(vector_1, vector_2) / length(vector_1) / length(vector_2))
+        / pi
+    )

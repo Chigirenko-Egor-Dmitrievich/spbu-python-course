@@ -25,7 +25,7 @@ def scalar_product(vector_1: list[float], vector_2: list[float]) -> float:
     """
 
     if len(vector_1) != len(vector_2):
-        raise ValueError("Error: Vectors lengths are not equal")
+        raise ValueError("Vectors lengths are not equal")
 
     return sum([vector_1[i] * vector_2[i] for i in range(len(vector_1))])
 
@@ -60,7 +60,7 @@ def angle(vector_1: list[float], vector_2: list[float]) -> float:
     """
 
     if len(vector_1) != len(vector_2):
-        raise ValueError("Error: Vectors lengths are not equal")
+        raise ValueError("Vectors lengths are not equal")
 
     return (
         180

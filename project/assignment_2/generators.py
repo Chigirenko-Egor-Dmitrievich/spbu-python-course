@@ -105,6 +105,3 @@ def squaring(stream: Iterable[Any]) -> Iterator[Any]:
             raise TypeError(f"Element {x} type of {type(x).__name__} cannot be squared")
 
     return map(safe_squaring, stream)
-
-
-print(aggregate(sieve_eratosthenes_generator(100)))

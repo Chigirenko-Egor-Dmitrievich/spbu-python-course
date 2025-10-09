@@ -34,7 +34,7 @@ def test_aggregate(input_stream, expected):
 )
 def test_squaring(input_stream, expected):
     """Squaring function test"""
-    assert g.squaring(input_stream) == expected
+    assert g.aggregate(g.squaring(input_stream)) == expected
 
 
 def test_error_squaring():
@@ -90,14 +90,14 @@ def test_errorType_sieve_eratosthenes_generator():
     """Generator function errorType test"""
     input_number = "10"
     with pytest.raises(TypeError):
-        g.sieve_eratosthenes_generator(input_number)
+        g.aggregate(g.sieve_eratosthenes_generator(input_number))
 
 
 def test_errorValue_sieve_eratosthenes_generator():
     """Generator function errorValue test"""
     input_number = -10
     with pytest.raises(ValueError):
-        g.sieve_eratosthenes_generator(input_number)
+        g.aggregate(g.sieve_eratosthenes_generator(input_number))
 
 
 @pytest.mark.parametrize(
@@ -119,7 +119,7 @@ def test_errorValue_sieve_eratosthenes_generator():
         ),
         (
             [1, 2, 3],
-            [g.squaring, iter([lambda x: reduce(lambda y, z: y + z, x)])],
+            [g.squaring, [lambda x: reduce(lambda y, z: y + z, x)]],
             [14],
         ),
     ],

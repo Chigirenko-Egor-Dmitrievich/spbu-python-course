@@ -119,7 +119,7 @@ def test_errorValue_sieve_eratosthenes_generator():
         ),
         (
             [1, 2, 3],
-            [g.squaring, [lambda x: reduce(lambda y, z: y + z, x)]],
+            [g.squaring, lambda x: [reduce(lambda y, z: y + z, x)], tuple],
             [14],
         ),
     ],

@@ -4,25 +4,34 @@ from typing import Iterator
 from functools import reduce
 
 
-def gen() -> Iterator[list[int]]:
+def gen_lst() -> Iterator[list[int]]:
     """Function that returns an iterator of lists"""
     yield [1, 2, 3]
     yield [4, 5, 6]
     yield [7, 8, 9]
 
 
+def gen_tpl() -> Iterator[tuple[str, int]]:
+    """Function that returns an iterator of tuples"""
+    yield ("1st", 1)
+    yield ("2nd", 2)
+    yield ("3rd", 3)
+
+
 @pytest.mark.parametrize(
-    "input_stream, expected",
+    "input_stream, collection, expected",
     [
-        (range(5), [0, 1, 2, 3, 4]),
-        (map(str, range(5, 10)), ["5", "6", "7", "8", "9"]),
-        (gen(), [[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
-        ([1, 2, 3], [1, 2, 3]),
+        (range(5), list, [0, 1, 2, 3, 4]),
+        (range(5, 10), str, "56789"),
+        (gen_lst(), tuple, ([1, 2, 3], [4, 5, 6], [7, 8, 9])),
+        ([1, 1, 2, 2, 3, 3], set, {1, 2, 3}),
+        (gen_tpl(), dict, {"1st": 1, "2nd": 2, "3rd": 3}),
+        (range(1, 5), dict, [1, 2, 3, 4]),
     ],
 )
-def test_aggregate(input_stream, expected):
+def test_aggregate(input_stream, collection, expected):
     """Aggregate function test"""
-    assert g.aggregate(input_stream) == expected
+    assert g.aggregate(input_stream, collection) == expected
 
 
 @pytest.mark.parametrize(
@@ -101,29 +110,74 @@ def test_errorValue_sieve_eratosthenes_generator():
 
 
 @pytest.mark.parametrize(
-    "input_stream, operations, expected",
+    "input_stream, operations, collection, expected",
     [
         (
             g.sieve_eratosthenes_generator(10),
-            [lambda x: map(lambda y: y * 2, x), g.squaring],
-            [16, 36, 100, 196],
+            [
+                (map, lambda x: x * 2),
+                g.squaring,
+            ],
+            tuple,
+            (16, 36, 100, 196),
         ),
         (
             range(5),
             [
                 g.squaring,
-                lambda x: filter(lambda y: y >= 8, x),
-                lambda x: zip(["1st", "2nd"], x),
+                (filter, lambda x: x >= 8),
+                (zip, ["1st", "2nd"]),
             ],
-            [("1st", 9), ("2nd", 16)],
+            dict,
+            {"1st": 9, "2nd": 16},
         ),
         (
-            [1, 2, 3],
-            [g.squaring, lambda x: [reduce(lambda y, z: y + z, x)], tuple],
+            [1, -1, 2, -2, 3, -3],
+            [
+                g.squaring,
+                set,
+                (reduce, lambda x, y: x + y),
+                list,
+            ],
+            list,
             [14],
         ),
     ],
 )
-def test_pipeline(input_stream, operations, expected):
+def test_pipeline(input_stream, operations, collection, expected):
     """Pipeline function test"""
-    assert g.aggregate(g.pipeline(input_stream, operations)) == expected
+    assert g.aggregate(g.pipeline(input_stream, operations), collection) == expected
+
+
+@pytest.mark.parametrize(
+    "input_stream, operations, expected",
+    [
+        (
+            g.sieve_eratosthenes_generator(20),
+            [
+                (map, lambda x: x + 1),
+                (filter, lambda x: x % 2 == 0),
+                g.squaring,
+                enumerate,
+                (map, lambda x, y: (str(x), y)),
+            ],
+            [
+                ("1", 16),
+                ("2", 36),
+                ("3", 64),
+                ("4", 144),
+                "the remaining elements of iterator have not been calculated yet",
+            ],
+        ),
+    ],
+)
+def test_lazy_pipeline(input_stream, operations, expected):
+    """Pipeline function lazy computation test"""
+    temp = g.pipeline(input_stream, operations)
+    assert [
+        next(temp),
+        next(temp),
+        next(temp),
+        next(temp),
+        "the remaining elements of iterator have not been calculated yet",
+    ] == expected

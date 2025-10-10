@@ -7,7 +7,7 @@ implementation of custom function that squares elements of iterable objects.
 """
 
 from math import isqrt
-from typing import Iterator, Iterable, Any, Callable
+from typing import Iterator, Iterable, Any, Callable, Union
 
 
 def sieve_eratosthenes_generator(end: int) -> Iterator[int]:
@@ -48,7 +48,10 @@ def sieve_eratosthenes_generator(end: int) -> Iterator[int]:
 
 
 def pipeline(
-    stream: Iterable[Any], operations: list[Callable[[Iterable[Any]], Iterable[Any]]]
+    stream: Iterable[Any],
+    operations: list[
+        Union[Callable[[Iterable[Any]], Iterable[Any]], tuple[Callable, ...]]
+    ],
 ) -> Iterator[Any]:
     """
     Pipeline function that applies the given operations sequentially to the input iterator.
@@ -65,23 +68,55 @@ def pipeline(
     current_stream: Iterable[Any] = stream
 
     for operation in operations:
-        current_stream = operation(current_stream)
+        if callable(operation):
+            current_stream = operation(current_stream)
+
+        else:
+            func, *args = operation
+            current_stream = func(*args, current_stream)
 
     return iter(current_stream)
 
 
-def aggregate(stream: Iterable[Any]) -> list[Any]:
+def aggregate(stream: Iterable[Any], collection: type = list) -> Any:
     """
-    Aggregate function that collects the iterator elements into a list.
+    Aggregate function that collects the iterator elements into the given collection.
 
     Args:
         stream: The given iterator
+        collection: The given collection; list by defolt
 
     Returns:
-        The list of elements from the given iterator
+        The collection of elements from the given iterator
     """
 
-    return list(stream)
+    match collection:
+        case _ if collection is list:
+            return list(stream)
+
+        case _ if collection is tuple:
+            return tuple(stream)
+
+        case _ if collection is set:
+            return set(stream)
+
+        case _ if collection is frozenset:
+            return frozenset(stream)
+
+        case _ if collection is str:
+            return "".join(map(str, stream))
+
+        case _ if collection is dict:
+            try:
+                return dict(stream)
+            except TypeError:
+                print(
+                    "The given iterator cannot be converted into a dictionary; it is converted into a list instead"
+                )
+                return list(stream)
+
+        case _:
+            return list(stream)
 
 
 def squaring(stream: Iterable[Any]) -> Iterator[Any]:
@@ -98,7 +133,7 @@ def squaring(stream: Iterable[Any]) -> Iterator[Any]:
         TypeError: If elements of iterable object cannot be squared
     """
 
-    def safe_squaring(x):
+    def safe_squaring(x: int) -> int:
         try:
             return x**2
         except TypeError:

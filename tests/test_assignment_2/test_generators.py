@@ -137,10 +137,10 @@ def test_errorValue_sieve_eratosthenes_generator():
                 g.squaring,
                 set,
                 (reduce, lambda x, y: x + y),
-                list,
+                str,
             ],
-            list,
-            [14],
+            str,
+            "14",
         ),
     ],
 )
@@ -159,7 +159,7 @@ def test_pipeline(input_stream, operations, collection, expected):
                 (filter, lambda x: x % 2 == 0),
                 g.squaring,
                 enumerate,
-                (map, lambda x, y: (str(x), y)),
+                (map, lambda x: (str(x[0]), x[1])),
             ],
             [
                 ("1", 16),

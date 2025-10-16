@@ -134,6 +134,7 @@ def squaring(stream: Iterable[Any]) -> Iterator[Any]:
     """
 
     def safe_squaring(x: int) -> int:
+        """Custom function that tries to square an element from the given iterator from squaring function"""
         try:
             return x**2
         except TypeError:

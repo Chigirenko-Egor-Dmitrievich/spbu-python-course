@@ -13,10 +13,14 @@ def cache_function(
         if limit <= 0:
             return func
 
-        cache = OrderedDict()
+        cache: OrderedDict[
+            tuple[tuple[Any, ...], frozenset[tuple[str, Any]]], Any
+        ] = OrderedDict()
 
         @ft.wraps(func)
         def inner(*args: Any, **kwargs: Any) -> Any:
+            key: tuple[tuple[Any, ...], frozenset[tuple[str, Any]]]
+
             try:
                 check = hash(args)
                 key = (args, frozenset(kwargs.items()))

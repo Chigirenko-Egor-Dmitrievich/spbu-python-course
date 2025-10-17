@@ -31,17 +31,15 @@ def check_matrices(
     ) or any(
         len(matrix_2[i]) != len(matrix_2[i + 1]) for i in range(len(matrix_2) - 1)
     ):
-        raise ValueError(
-            "Error: One or both matrices do not match the definition of matrix"
-        )
+        raise ValueError("One or both matrices do not match the definition of matrix")
 
     if (operation == "addition") and (
         (len(matrix_1) != len(matrix_2)) or (len(matrix_1[0]) != len(matrix_2[0]))
     ):
-        raise ValueError("Error: Invalid conditions for matrix addition")
+        raise ValueError("Invalid conditions for matrix addition")
 
     if (operation == "multiplication") and (len(matrix_1[0]) != len(matrix_2)):
-        raise ValueError("Error: Invalid conditions for matrix multiplication")
+        raise ValueError("Invalid conditions for matrix multiplication")
 
     return None
 

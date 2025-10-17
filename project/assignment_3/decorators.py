@@ -43,19 +43,7 @@ def cache_function(
                 check = hash(args)
                 key = (args, tuple(sorted(kwargs.items())))
             except TypeError:
-                hashable_args = list(args)
-                for i in range(len(hashable_args)):
-                    match i:
-                        case _ if type(hashable_args[i]) is list:
-                            hashable_args[i] = tuple(hashable_args[i])
-                        case _ if type(hashable_args[i]) is dict:
-                            hashable_args[i] = tuple(sorted(hashable_args[i].items()))
-                        case _ if type(hashable_args[i]) is set:
-                            hashable_args[i] = frozenset(hashable_args[i])
-                        case _ if type(hashable_args[i]) is bytearray:
-                            hashable_args[i] = tuple(hashable_args[i])
-                hashable_args_tpl = tuple(hashable_args)
-                key = (hashable_args_tpl, tuple(sorted(kwargs.items())))
+                return func(*args, **kwargs)
 
             if key in cache:
                 cache.move_to_end(key)

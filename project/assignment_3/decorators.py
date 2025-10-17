@@ -37,7 +37,7 @@ def cache_function(
 
         @ft.wraps(func)
         def inner(*args: Any, **kwargs: Any) -> Any:
-            key: tuple[tuple[Any, ...], tuple[tuple[str, Any]]]
+            key: tuple[tuple[Any, ...], tuple[tuple[str, Any], ...]]
 
             try:
                 check = hash(args)

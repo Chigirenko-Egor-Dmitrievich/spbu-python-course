@@ -30,7 +30,7 @@ def uncurry_explicit(func: Callable[..., Any], arity: int) -> Callable[..., Any]
 
         if len(args) != arity:
             first_word = "argument" if arity == 1 else "arguments"
-            second_word = "argument is" if arity == 1 else "arguments are"
+            second_word = "argument is" if len(args) == 1 else "arguments are"
             raise ValueError(
                 f"The curried function expects {arity} "
                 + f"{first_word}, but {len(args)} "

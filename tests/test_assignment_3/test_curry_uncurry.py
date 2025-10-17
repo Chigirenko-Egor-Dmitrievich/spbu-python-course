@@ -40,14 +40,10 @@ def test_check_curry_one_at_the_time():
     f = curry_explicit((lambda x, y, z: f"<{x},{y},{z}>"), 3)
     assert f(123)(456)(789) == "<123,456,789>"
 
-    with pytest.raises(
-        TypeError, match="<lambda>() takes 1 positional argument but 2 were given"
-    ):
+    with pytest.raises(TypeError, match="takes 1 positional argument but 2 were given"):
         f(123, 456)(789)
 
-    with pytest.raises(
-        TypeError, match="<lambda>() takes 1 positional argument but 3 were given"
-    ):
+    with pytest.raises(TypeError, match="takes 1 positional argument but 3 were given"):
         f(123, 456, 789)
 
 
@@ -111,7 +107,7 @@ def test_curry_uncurry():
     curried = curry_explicit(original, 3)
     uncurried = uncurry_explicit(curried, 3)
 
-    assert uncurried(1, 2, 3) == original(2, 3, 4)
+    assert uncurried(1, 2, 3) == original(1, 2, 3)
 
     curried_abs = curry_explicit(abs, 1)
     uncurried_abs = uncurry_explicit(curried_abs, 1)

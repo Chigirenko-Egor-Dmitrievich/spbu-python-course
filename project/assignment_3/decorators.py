@@ -8,7 +8,7 @@ import functools as ft
 import inspect
 import copy
 from collections import OrderedDict
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, Hashable
 
 
 def cache_function(
@@ -33,17 +33,15 @@ def cache_function(
         if limit <= 0:
             return func
 
-        cache: OrderedDict[
-            tuple[tuple[Any, ...], frozenset[tuple[str, Any]]], Any
-        ] = OrderedDict()
+        cache: OrderedDict[Hashable, Any] = OrderedDict()
 
         @ft.wraps(func)
         def inner(*args: Any, **kwargs: Any) -> Any:
-            key: tuple[tuple[Any, ...], frozenset[tuple[str, Any]]]
+            key: tuple[tuple[Any, ...], tuple[tuple[str, Any]]]
 
             try:
                 check = hash(args)
-                key = (args, frozenset(kwargs.items()))
+                key = (args, tuple(sorted(kwargs.items())))
             except TypeError:
                 hashable_args = list(args)
                 for i in range(len(hashable_args)):
@@ -57,7 +55,7 @@ def cache_function(
                         case _ if type(hashable_args[i]) is bytearray:
                             hashable_args[i] = tuple(hashable_args[i])
                 hashable_args_tpl = tuple(hashable_args)
-                key = (hashable_args_tpl, frozenset(kwargs.items()))
+                key = (hashable_args_tpl, tuple(sorted(kwargs.items())))
 
             if key in cache:
                 cache.move_to_end(key)

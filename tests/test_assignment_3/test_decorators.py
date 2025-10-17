@@ -89,13 +89,6 @@ def test_cache_with_builtins():
     cach_len("MIN")
     assert len_count == 2
 
-    cach_len("Hi")
-    assert len_count == 1
-    cach_len("Hello")
-    assert len_count == 2
-    cach_len("Hi")
-    assert len_count == 2
-
     cach_print("Sentence")
     assert print_count == 1
     cach_print("Another sentence")

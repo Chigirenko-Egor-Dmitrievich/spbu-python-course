@@ -1,8 +1,28 @@
+"""
+Explicit function currying and uncurrying utilities.
+
+This module provides functions to transform functions between their normal and curried forms with explicit control over arity.
+"""
+
+
 import functools as ft
 from typing import Callable, Any
 
 
 def curry_explicit(func: Callable[..., Any], arity: int) -> Callable[..., Any]:
+    """
+    Convert a function into its curried version with explicit arity.
+
+    Args:
+        func: The function to curry
+        arity: Number of arguments the function expects
+
+    Returns:
+        Curried version of the input function
+
+    Raises:
+        ValueError: If arity is negative
+    """
 
     if arity < 0:
         raise ValueError("Arity must be a non-negative number")
@@ -21,6 +41,19 @@ def curry_explicit(func: Callable[..., Any], arity: int) -> Callable[..., Any]:
 
 
 def uncurry_explicit(func: Callable[..., Any], arity: int) -> Callable[..., Any]:
+    """
+    Convert a curried function back to its normal form with explicit arity.
+
+    Args:
+        func: The curried function to uncurry
+        arity: Number of arguments the original function expected
+
+    Returns:
+        Uncurried version of the input function
+
+    Raises:
+        ValueError: If arity is negative or wrong number of arguments provided
+    """
 
     if arity < 0:
         raise ValueError("Arity must be a non-negative number")

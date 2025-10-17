@@ -1,3 +1,9 @@
+"""
+Advanced function decorators for caching and smart argument processing.
+
+This module provides decorators for function caching with configurable limits and intelligent handling of default argument evaluation and isolation.
+"""
+
 import functools as ft
 import inspect
 import copy
@@ -8,6 +14,20 @@ from typing import Any, Callable, Optional
 def cache_function(
     _func: Optional[Callable] = None, *, limit: int = 0
 ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+    """
+    Cache function results with configurable size limit and automatic cleanup.
+
+    Args:
+        _func: Function to decorate (for decorator without parentheses)
+        limit: Maximum cache size (0 = no caching)
+
+    Returns:
+        Decorated function with caching behavior
+
+    Note:
+        Automatically handles unhashable types and provides cache statistics
+    """
+
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
 
         if limit <= 0:
@@ -64,17 +84,45 @@ def cache_function(
 
 
 class Evaluated:
+    """
+    Marker for deferred evaluation of default arguments.
+
+    When used as a default value, the wrapped function will be called to generate the actual default value at call time.
+    """
+
     def __init__(self, func: Callable[..., Any]) -> None:
         self.func = func
 
 
 class Isolated:
+    """
+    Marker for deep copy isolation of argument values.
+
+    When used as a default value, the argument will be deep copied to prevent mutable argument sharing between calls.
+    """
+
     pass
 
 
 def smart_args(
     _func: Optional[Callable] = None, *, allow_pos_args: bool = True
 ) -> Callable[..., Any]:
+    """
+    Enhance function arguments with deferred evaluation and isolation.
+
+    Args:
+        _func: Function to decorate (for decorator without parentheses)
+        allow_pos_args: Whether to process positional arguments
+
+    Returns:
+        Decorated function with enhanced argument handling
+
+    Features:
+        - Deferred evaluation of default values using Evaluated
+        - Deep copy isolation using Isolated
+        - Runtime validation of argument combinations
+    """
+
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         spec = inspect.getfullargspec(func)
 

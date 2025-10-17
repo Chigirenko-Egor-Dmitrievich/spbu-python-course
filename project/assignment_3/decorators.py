@@ -36,8 +36,8 @@ def cache_function(
                             hashable_args[i] = frozenset(hashable_args[i])
                         case _ if type(hashable_args[i]) is bytearray:
                             hashable_args[i] = tuple(hashable_args[i])
-                hashable_args = tuple(hashable_args)
-                key = (hashable_args, frozenset(kwargs.items()))
+                hashable_args_tpl = tuple(hashable_args)
+                key = (hashable_args_tpl, frozenset(kwargs.items()))
 
             if key in cache:
                 cache.move_to_end(key)

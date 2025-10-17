@@ -49,7 +49,7 @@ def cache_function(
                         case _ if type(hashable_args[i]) is list:
                             hashable_args[i] = tuple(hashable_args[i])
                         case _ if type(hashable_args[i]) is dict:
-                            hashable_args[i] = tuple(hashable_args[i].items())
+                            hashable_args[i] = tuple(sorted(hashable_args[i].items()))
                         case _ if type(hashable_args[i]) is set:
                             hashable_args[i] = frozenset(hashable_args[i])
                         case _ if type(hashable_args[i]) is bytearray:

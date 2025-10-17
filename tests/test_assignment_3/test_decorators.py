@@ -134,7 +134,7 @@ def test_evaluated_default_positional_args():
         counter += 2
         return counter
 
-    @smart_args()
+    @smart_args
     def func(a=Evaluated(to_count)):
         return a
 
@@ -145,7 +145,7 @@ def test_evaluated_default_positional_args():
 def test_isolated_default_positional_args():
     """The test for Isolated default for positional arguments"""
 
-    @smart_args()
+    @smart_args
     def func(a=Isolated()):
         a.append("4")
         return a
@@ -199,7 +199,7 @@ def test_mixed_args_cache_and_smart_args():
         return counter_b
 
     @cache_function(limit=5)
-    @smart_args()
+    @smart_args
     def complex_fn(
         a=Isolated(), b=Evaluated(count_a), *, x=Evaluated(count_b), y=Isolated()
     ):
@@ -224,7 +224,7 @@ def test_mixed_args_cache_and_smart_args():
 def test_check_non_default_and_defaults_mix():
     """The test for checking whether args and defaulted args could be mixed"""
 
-    @smart_args()
+    @smart_args
     def f(first, second=Isolated(), *, kw1, kw2=Evaluated(lambda: "Nothing!")):
         second.append(first)
         return {"1st": first, "2nd": second, "kw1": kw1, "kw2": kw2}

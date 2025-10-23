@@ -12,7 +12,7 @@ from typing import Any, Callable, Optional, Hashable
 
 
 def cache_function(
-    _func: Optional[Callable] = None, *, limit: int = 0
+    _func: Optional[Callable] = None, *, limit: int = 0, output: bool = False
 ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """
     Cache function results with configurable size limit and automatic cleanup.
@@ -20,6 +20,7 @@ def cache_function(
     Args:
         _func: Function to decorate (for decorator without parentheses)
         limit: Maximum cache size (0 = no caching)
+        output: A switch that allows you to turn on or off the output of information about the caching process.
 
     Returns:
         Decorated function with caching behavior
@@ -47,17 +48,20 @@ def cache_function(
 
             if key in cache:
                 cache.move_to_end(key)
-                print(f"Returning {cache[key]} from cache")
+                if output:
+                    print(f"Returning {cache[key]} from cache")
                 return cache[key]
 
             result = func(*args, **kwargs)
 
             if len(cache) >= limit:
                 temp = cache.popitem(last=False)
-                print(f"Removing the oldest element: {temp}")
+                if output:
+                    print(f"Removing the oldest element: {temp}")
 
             cache[key] = result
-            print(f"Adding new element: {key} ---> {result}")
+            if output:
+                print(f"Adding new element: {key} ---> {result}")
 
             return result
 

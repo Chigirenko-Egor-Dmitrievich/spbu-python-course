@@ -7,7 +7,7 @@ import pytest
 import builtins
 from project.assignment_4.zonk_players import Player, Human, Bot, Strategy
 from project.assignment_4.zonk_config import BotStrategy, GamePhase
-from project.assignment_4.zonk_dices import Dice
+from project.assignment_4.zonk_dices import Dice, ScoreCalculator
 
 
 def test_player_initialization():
@@ -109,7 +109,7 @@ def test_strategy_routing():
     result_conservative = strategy.make_strategy(BotStrategy.CONSERVATIVE, 100, 3)
     result_aggressive = strategy.make_strategy(BotStrategy.AGGRESSIVE, 100, 3)
 
-    assert result_conservative == True
+    assert result_conservative == False
     assert result_aggressive == False
 
 
@@ -160,18 +160,14 @@ def test_conservative_strategy_decisions():
             self.current_round: int = 0
             self.game_over: bool = False
             self.final_round: bool = False
+            self.players: list["Player"] = [bot]
 
     bot._game_ = SimpleGame()
 
-    # Test case: high score -> should bank
-    result_high_score = strategy.conservative_strategy(100, 3)
-    # Conservative should bank at high scores
-    assert result_high_score == False
-
-    # Test case: low score with many dice -> should continue
     result_low_score = strategy.conservative_strategy(20, 6)
-    # Conservative might continue with many dice and low score
+    result_high_score = strategy.conservative_strategy(100, 3)
     assert result_low_score == True
+    assert result_high_score == False
 
 
 def test_aggressive_strategy_decisions():
@@ -189,12 +185,14 @@ def test_aggressive_strategy_decisions():
             self.current_round: int = 0
             self.game_over: bool = False
             self.final_round: bool = False
+            self.players: list["Player"] = [bot]
 
     bot._game_ = SimpleGame()
 
-    # Aggressive strategy should be more likely to continue
-    result = strategy.aggressive_strategy(50, 3)
-    assert result == True
+    result_low_score = strategy.aggressive_strategy(50, 3)
+    result_high_score = strategy.aggressive_strategy(300, 3)
+    assert result_low_score == True
+    assert result_high_score == False
 
 
 def test_adaptive_strategy_phase_changes():
@@ -214,6 +212,7 @@ def test_adaptive_strategy_phase_changes():
             self.dice: Dice = Dice()
             self.game_over: bool = False
             self.final_round: bool = False
+            self.players: list["Player"] = [bot]
 
     # Test early phase (should use conservative)
     bot._game_ = SimpleGame(2)
@@ -227,7 +226,52 @@ def test_adaptive_strategy_phase_changes():
     bot._game_ = SimpleGame(18)
     late_result = strategy.adaptive_strategy(50, 3)
 
-    # All should be boolean decisions
     assert early_result == True
     assert middle_result == True
     assert late_result == True
+
+
+def test_copycat_strategy_phase_changes():
+    """Test copycat strategy changes with score changing."""
+    copycat_bot = Bot("CopycatTestBot", BotStrategy.COPYCAT)
+    copycat_strategy = Strategy(copycat_bot)
+
+    conservative_bot = Bot("ConservativeTestBot", BotStrategy.CONSERVATIVE)
+    conservative_strategy = Strategy(conservative_bot)
+
+    aggressive_bot = Bot("AggressiveTestBot", BotStrategy.AGGRESSIVE)
+    aggressive_strategy = Strategy(aggressive_bot)
+
+    # Create minimal game with config
+    class SimpleGame:
+        def __init__(self):
+            self.current_round = 0
+            self.config = type(
+                "Config",
+                (),
+                {"max_rounds": 20, "min_score_to_bank": 30, "max_rounds": 20},
+            )()
+            self.dice: Dice = Dice()
+            self.game_over: bool = False
+            self.final_round: bool = False
+            self.players: list["Player"] = [
+                copycat_bot,
+                conservative_bot,
+                aggressive_bot,
+            ]
+
+    copycat_bot._game_ = SimpleGame()
+
+    conservative_result = conservative_strategy.conservative_strategy(200, 2)
+    aggressive_result = aggressive_strategy.aggressive_strategy(100, 2)
+    copycat_result = copycat_strategy.copycat_strategy(100, 2)
+    assert conservative_result == False
+    assert aggressive_result == True
+    assert copycat_result == False
+
+    conservative_result = conservative_strategy.conservative_strategy(100, 2)
+    aggressive_result = aggressive_strategy.aggressive_strategy(120, 2)
+    copycat_result = copycat_strategy.copycat_strategy(100, 2)
+    assert conservative_result == False
+    assert aggressive_result == True
+    assert copycat_result == True

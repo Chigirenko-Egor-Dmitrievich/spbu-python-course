@@ -11,7 +11,7 @@ from project.assignment_4.zonk_config import BotStrategy, GamePhase
 
 def test_player_initialization():
     """Test player initialization with name and default values."""
-    player = Player("TestPlayer")
+    player = Bot("TestBot", BotStrategy.CONSERVATIVE)
     assert player.name == "TestPlayer"
     assert player.total_score == 0
     assert player.consecutive_zonks == 0
@@ -21,7 +21,7 @@ def test_player_initialization():
 
 def test_player_set_game():
     """Test setting game reference for player."""
-    player = Player("TestPlayer")
+    player = Bot("TestBot", BotStrategy.CONSERVATIVE)
 
     # Create a minimal game-like object
     class SimpleGame:
@@ -34,7 +34,7 @@ def test_player_set_game():
 
 def test_player_zonk_management():
     """Test zonk counter management."""
-    player = Player("TestPlayer")
+    player = Bot("TestBot", BotStrategy.CONSERVATIVE)
 
     # Initial state
     assert player.consecutive_zonks == 0
@@ -53,7 +53,7 @@ def test_player_zonk_management():
 
 def test_player_penalty_application():
     """Test penalty application logic."""
-    player = Player("TestPlayer")
+    player = Bot("TestBot", BotStrategy.CONSERVATIVE)
     player.total_score = 100
 
     # Apply penalty
@@ -67,7 +67,7 @@ def test_player_penalty_application():
 
 def test_player_string_representation():
     """Test player string representation."""
-    player = Player("TestPlayer")
+    player = Bot("TestBot", BotStrategy.CONSERVATIVE)
     player.total_score = 150
     player.consecutive_zonks = 2
 
@@ -152,7 +152,9 @@ def test_conservative_strategy_decisions():
     # Create minimal game with config
     class SimpleGame:
         def __init__(self):
-            self.config = type("Config", (), {"min_score_to_bank": 30})()
+            self.config = type(
+                "Config", (), {"min_score_to_bank": 30, "max_rounds": 20}
+            )()
 
     bot._game_ = SimpleGame()
 
@@ -175,7 +177,9 @@ def test_aggressive_strategy_decisions():
     # Create minimal game with config
     class SimpleGame:
         def __init__(self):
-            self.config = type("Config", (), {"min_score_to_bank": 30})()
+            self.config = type(
+                "Config", (), {"min_score_to_bank": 30, "max_rounds": 20}
+            )()
 
     bot._game_ = SimpleGame()
 
@@ -194,7 +198,9 @@ def test_adaptive_strategy_phase_changes():
         def __init__(self, current_round):
             self.current_round = current_round
             self.config = type(
-                "Config", (), {"max_rounds": 20, "min_score_to_bank": 30}
+                "Config",
+                (),
+                {"max_rounds": 20, "min_score_to_bank": 30, "max_rounds": 20},
             )()
 
     # Test early phase (should use conservative)

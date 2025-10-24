@@ -87,13 +87,14 @@ def test_three_twos():
     """Test scoring for three twos."""
     dice = [2, 2, 2, 3, 4, 5]
     score, used_dice = ScoreCalculator.calculate_score(dice)
-    assert score == 20  # 2 * 10
+    assert score == 25  # 2 * 10 + 5
     assert used_dice.count(2) == 3
+    assert used_dice.count(5) == 1
 
 
 def test_single_ones_and_fives():
     """Test scoring for single ones and fives."""
-    dice = [1, 5, 2, 3, 4, 6]
+    dice = [1, 5, 2, 2, 4, 6]
     score, used_dice = ScoreCalculator.calculate_score(dice)
     assert score == 15  # 10 for 1 + 5 for 5
     assert 1 in used_dice

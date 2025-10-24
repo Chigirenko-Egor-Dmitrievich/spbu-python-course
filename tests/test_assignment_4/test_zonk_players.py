@@ -7,12 +7,13 @@ import pytest
 import builtins
 from project.assignment_4.zonk_players import Player, Human, Bot, Strategy
 from project.assignment_4.zonk_config import BotStrategy, GamePhase
+from project.assignment_4.zonk_dices import Dice
 
 
 def test_player_initialization():
     """Test player initialization with name and default values."""
     player = Bot("TestBot", BotStrategy.CONSERVATIVE)
-    assert player.name == "TestPlayer"
+    assert player.name == "TestBot"
     assert player.total_score == 0
     assert player.consecutive_zonks == 0
     assert player.is_active == True
@@ -72,7 +73,7 @@ def test_player_string_representation():
     player.consecutive_zonks = 2
 
     representation = str(player)
-    assert "TestPlayer" in representation
+    assert "TestBot" in representation
     assert "150" in representation
     assert "2" in representation
 
@@ -108,8 +109,8 @@ def test_strategy_routing():
     result_conservative = strategy.make_strategy(BotStrategy.CONSERVATIVE, 100, 3)
     result_aggressive = strategy.make_strategy(BotStrategy.AGGRESSIVE, 100, 3)
 
-    assert isinstance(result_conservative, bool)
-    assert isinstance(result_aggressive, bool)
+    assert result_conservative == True
+    assert result_aggressive == False
 
 
 def test_game_phase_detection():
@@ -155,6 +156,10 @@ def test_conservative_strategy_decisions():
             self.config = type(
                 "Config", (), {"min_score_to_bank": 30, "max_rounds": 20}
             )()
+            self.dice: Dice = Dice()
+            self.current_round: int = 0
+            self.game_over: bool = False
+            self.final_round: bool = False
 
     bot._game_ = SimpleGame()
 
@@ -166,7 +171,7 @@ def test_conservative_strategy_decisions():
     # Test case: low score with many dice -> should continue
     result_low_score = strategy.conservative_strategy(20, 6)
     # Conservative might continue with many dice and low score
-    assert isinstance(result_low_score, bool)
+    assert result_low_score == True
 
 
 def test_aggressive_strategy_decisions():
@@ -180,12 +185,16 @@ def test_aggressive_strategy_decisions():
             self.config = type(
                 "Config", (), {"min_score_to_bank": 30, "max_rounds": 20}
             )()
+            self.dice: Dice = Dice()
+            self.current_round: int = 0
+            self.game_over: bool = False
+            self.final_round: bool = False
 
     bot._game_ = SimpleGame()
 
     # Aggressive strategy should be more likely to continue
     result = strategy.aggressive_strategy(50, 3)
-    assert isinstance(result, bool)
+    assert result == True
 
 
 def test_adaptive_strategy_phase_changes():
@@ -202,6 +211,9 @@ def test_adaptive_strategy_phase_changes():
                 (),
                 {"max_rounds": 20, "min_score_to_bank": 30, "max_rounds": 20},
             )()
+            self.dice: Dice = Dice()
+            self.game_over: bool = False
+            self.final_round: bool = False
 
     # Test early phase (should use conservative)
     bot._game_ = SimpleGame(2)
@@ -216,6 +228,6 @@ def test_adaptive_strategy_phase_changes():
     late_result = strategy.adaptive_strategy(50, 3)
 
     # All should be boolean decisions
-    assert isinstance(early_result, bool)
-    assert isinstance(middle_result, bool)
-    assert isinstance(late_result, bool)
+    assert early_result == True
+    assert middle_result == True
+    assert late_result == True

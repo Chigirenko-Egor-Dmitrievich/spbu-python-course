@@ -155,7 +155,7 @@ def test_three_consecutive_zonks_penalty():
 
     player = Bot("TestBot", BotStrategy.CONSERVATIVE)
     player.total_score = 200
-    player.consecutive_zonks = 3  # Three consecutive zonks
+    player.consecutive_zonks = 2  # Two consecutive zonks
     game.players = [player]
 
     # Simulate a zonk turn

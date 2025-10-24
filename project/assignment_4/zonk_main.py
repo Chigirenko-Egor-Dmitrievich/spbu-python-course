@@ -5,9 +5,9 @@ This module provides the entry point for the game, allowing configuration
 and setup of players before starting the main game loop.
 """
 
-from zonk_game import Game
-from zonk_players import Bot, Human
-from zonk_config import BotStrategy, GameConfig
+from project.assignment_4.zonk_game import Game
+from project.assignment_4.zonk_players import Bot, Human
+from project.assignment_4.zonk_config import BotStrategy, GameConfig
 
 
 def main() -> None:

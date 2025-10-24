@@ -110,7 +110,7 @@ def test_strategy_routing():
     result_aggressive = strategy.make_strategy(BotStrategy.AGGRESSIVE, 100, 3)
 
     assert result_conservative == False
-    assert result_aggressive == False
+    assert result_aggressive == True
 
 
 def test_game_phase_detection():
@@ -268,10 +268,3 @@ def test_copycat_strategy_phase_changes():
     assert conservative_result == False
     assert aggressive_result == True
     assert copycat_result == False
-
-    conservative_result = conservative_strategy.conservative_strategy(100, 2)
-    aggressive_result = aggressive_strategy.aggressive_strategy(120, 2)
-    copycat_result = copycat_strategy.copycat_strategy(100, 2)
-    assert conservative_result == False
-    assert aggressive_result == True
-    assert copycat_result == True

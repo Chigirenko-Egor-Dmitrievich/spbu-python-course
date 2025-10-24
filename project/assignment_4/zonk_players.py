@@ -120,6 +120,11 @@ class Human(Player):
                 if choice in ["д", "да", "y", "yes"]:
                     return True
                 elif choice in ["н", "нет", "n", "no"]:
+
+                    if self._game_ is None:
+                        # Default behavior if game is not set
+                        return current_turn_score < 30
+
                     # Checking for minimum score before banking
                     if current_turn_score >= self._game_.config.min_score_to_bank:
                         return False
@@ -284,7 +289,9 @@ class Strategy:
 
         game_phase: GamePhase = self.get_game_phase()
         is_behind: bool = self.is_behind_leader()
-        min_score: int = self.bot._game_.config.min_score_to_bank
+        min_score: int = (
+            30 if self.bot._game_ is None else self.bot._game_.config.min_score_to_bank
+        )
 
         if remaining_dice == 6 and current_turn_score <= min_score * 6:
             return True
@@ -318,7 +325,9 @@ class Strategy:
         game_phase: GamePhase = self.get_game_phase()
         is_behind: bool = self.is_behind_leader()
         is_far_behind: bool = self.is_far_behind_leader()
-        min_score: int = self.bot._game_.config.min_score_to_bank
+        min_score: int = (
+            30 if self.bot._game_ is None else self.bot._game_.config.min_score_to_bank
+        )
 
         if remaining_dice == 6:
             return True
@@ -356,7 +365,9 @@ class Strategy:
 
         game_phase: GamePhase = self.get_game_phase()
         is_far_behind: bool = self.is_far_behind_leader()
-        min_score: int = self.bot._game_.config.min_score_to_bank
+        min_score: int = (
+            30 if self.bot._game_ is None else self.bot._game_.config.min_score_to_bank
+        )
 
         if remaining_dice == 6:
             return True

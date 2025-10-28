@@ -86,25 +86,26 @@ class ScoreCalculator:
         # Counting combinations of identical dices
         for value in range(1, 7):
             count = temp_dice.count(value)
-            points: int
             if count >= 3:
                 if value == 1:
-                    if count == 3:
-                        points = 100
-                    elif count == 4:
-                        points = 200
-                    elif count == 5:
-                        points = 400
-                    elif count == 6:
-                        points = 1000
+                    match count:
+                        case 3:
+                            points = 100
+                        case 4:
+                            points = 200
+                        case 5:
+                            points = 400
+                        case 6:
+                            points = 1000
                 else:
                     points = value * 10
-                    if count == 4:
-                        points *= 2
-                    elif count == 5:
-                        points *= 4
-                    elif count == 6:
-                        points *= 8
+                    match count:
+                        case 4:
+                            points *= 2
+                        case 5:
+                            points *= 4
+                        case 6:
+                            points *= 8
 
                 score += points
                 # Removing the used dices

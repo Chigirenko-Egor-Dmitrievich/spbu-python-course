@@ -8,9 +8,7 @@ bot strategies with different decision-making algorithms for the game.
 from abc import ABC, abstractmethod
 from typing import Optional, TYPE_CHECKING
 from project.assignment_4.zonk_config import BotStrategy, GamePhase
-
-if TYPE_CHECKING:
-    from project.assignment_4.zonk_game import Game
+from project.assignment_4.zonk_game import Game
 
 
 class Player(ABC):

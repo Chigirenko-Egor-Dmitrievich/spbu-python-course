@@ -8,9 +8,7 @@ round progression, win condition checking, and game flow control.
 from typing import Optional, TYPE_CHECKING
 from project.assignment_4.zonk_dices import Dice, ScoreCalculator
 from project.assignment_4.zonk_config import GameConfig
-
-if TYPE_CHECKING:
-    from project.assignment_4.zonk_players import Player
+from project.assignment_4.zonk_players import Player
 
 
 class Turn:

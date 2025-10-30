@@ -72,13 +72,13 @@ def test_delete(some_hashtable):
     assert len(some_hashtable) == 4
 
     with pytest.raises(KeyError):
-        _ = some_hashtable[-0.5]
+        some_hashtable[-0.5]
 
 
 def test_delete_key_error(some_hashtable):
     """Test that KeyError is raised when deleting non-existent key."""
     with pytest.raises(KeyError):
-        del some_hashtable["nonexistent"]
+        del some_hashtable[2]
 
 
 def test_in_operator(some_hashtable):

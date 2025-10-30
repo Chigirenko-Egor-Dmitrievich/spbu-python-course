@@ -75,10 +75,10 @@ def test_delete(some_hashtable):
         some_hashtable[-0.5]
 
 
-def test_delete_key_error(some_hashtable):
+def test_delete_key_error(empty_hashtable):
     """Test that KeyError is raised when deleting non-existent key."""
     with pytest.raises(KeyError):
-        del some_hashtable[2]
+        del empty_hashtable["nonexistent"]
 
 
 def test_in_operator(some_hashtable):

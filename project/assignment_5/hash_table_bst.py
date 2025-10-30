@@ -264,17 +264,6 @@ class BST(MutableMapping):
 
         return self._count_
 
-    def items(self) -> Iterator[Tuple[Any, Any]]:
-        """
-        Iterate over key-value pairs in ascending key order.
-
-        Yields:
-            Tuples of (key, value) in ascending key order
-        """
-
-        for key in self:
-            yield (key, self[key])
-
 
 class HashTable(MutableMapping):
     """Hash table implementation using BST for collision resolution."""

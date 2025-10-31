@@ -204,3 +204,17 @@ def test_repeated_operations():
         assert "key" not in ht
 
     assert len(ht) == 0
+
+
+def test_BST_complex_delete(some_hashtable):
+    """Test complex BST deletion scenario with node having two children."""
+    some_hashtable[-0.7] = "6"
+    some_hashtable[-0.3] = "7"
+    expected_keys = [-2, -1, -0.7, -0.5, -0.3, 0, 1]
+    actual_keys = list(some_hashtable)
+    assert actual_keys == expected_keys
+
+    del some_hashtable[-1]
+    expected_keys = [-2, -0.7, -0.5, -0.3, 0, 1]
+    actual_keys = list(some_hashtable)
+    assert actual_keys == expected_keys

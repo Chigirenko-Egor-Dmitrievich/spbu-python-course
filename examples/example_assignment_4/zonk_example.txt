@@ -1,0 +1,448 @@
+THE BEGINNING OF THE ZONK GAME!
+The goals: 500 points or 10 rounds
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROUND 1
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Conservative turn:
+The roll: [3, 4, 3, 4, 5, 2]
+Scores for the roll: 5
+Scores for the turn: 5
+
+The roll: [2, 6, 1, 2, 3]
+Scores for the roll: 10
+Scores for the turn: 15
+
+The roll: [2, 6, 1, 5]
+Scores for the roll: 15
+Scores for the turn: 30
+
+Conservative decides to stop and bank 30 points
+Total score: 30
+
+
+Aggressive turn:
+The roll: [1, 5, 6, 4, 5, 2]
+Scores for the roll: 20
+Scores for the turn: 20
+
+The roll: [4, 3, 5]
+Scores for the roll: 5
+Scores for the turn: 25
+
+The roll: [4, 1]
+Scores for the roll: 10
+Scores for the turn: 35
+
+The roll: [6]
+ZONK! There is no a single scoring-dice
+
+
+Super_aggressive turn:
+The roll: [6, 5, 1, 1, 3, 1]
+Scores for the roll: 105
+Scores for the turn: 105
+
+The roll: [3, 3]
+ZONK! There is no a single scoring-dice
+
+
+Adaptive turn:
+The roll: [4, 3, 1, 4, 3, 5]
+Scores for the roll: 15
+Scores for the turn: 15
+
+The roll: [1, 1, 3, 1]
+Scores for the roll: 100
+Scores for the turn: 115
+
+Adaptive decides to stop and bank 115 points
+Total score: 115
+
+
+Copycat turn:
+The roll: [3, 1, 2, 6, 3, 2]
+Scores for the roll: 10
+Scores for the turn: 10
+
+The roll: [5, 5, 4, 4, 4]
+Scores for the roll: 50
+Scores for the turn: 60
+
+HOT HAND! All dices are scoring-dices; you can roll 6 dices again
+Copycat decides to stop and bank 60 points
+Total score: 60
+
+
+CURRENT STATE FOR ROUND 1:
+Conservative: 30 points (consecutive zonks: 0)
+Aggressive: 0 points (consecutive zonks: 1)
+Super_aggressive: 0 points (consecutive zonks: 1)
+Adaptive: 115 points (consecutive zonks: 0)
+Copycat: 60 points (consecutive zonks: 0)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROUND 2
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Conservative turn:
+The roll: [4, 5, 3, 2, 2, 6]
+Scores for the roll: 5
+Scores for the turn: 5
+
+The roll: [2, 4, 3, 1, 6]
+Scores for the roll: 10
+Scores for the turn: 15
+
+The roll: [3, 6, 6, 1]
+Scores for the roll: 10
+Scores for the turn: 25
+
+The roll: [1, 3, 1]
+Scores for the roll: 20
+Scores for the turn: 45
+
+Conservative decides to stop and bank 45 points
+Total score: 75
+
+
+Aggressive turn:
+The roll: [1, 3, 4, 1, 1, 3]
+Scores for the roll: 100
+Scores for the turn: 100
+
+The roll: [1, 5, 6]
+Scores for the roll: 15
+Scores for the turn: 115
+
+The roll: [3]
+ZONK! There is no a single scoring-dice
+
+
+Super_aggressive turn:
+The roll: [1, 5, 5, 5, 5, 5]
+Scores for the roll: 210
+Scores for the turn: 210
+
+HOT HAND! All dices are scoring-dices; you can roll 6 dices again
+Super_aggressive decides to take some risk and rolls all 6 dices again
+The roll: [4, 4, 4, 1, 1, 3]
+Scores for the roll: 60
+Scores for the turn: 270
+
+Super_aggressive decides to stop and bank 270 points
+Total score: 270
+
+
+Adaptive turn:
+The roll: [1, 6, 6, 2, 2, 1]
+Scores for the roll: 75
+Scores for the turn: 75
+
+HOT HAND! All dices are scoring-dices; you can roll 6 dices again
+Adaptive decides to take some risk and rolls all 6 dices again
+The roll: [1, 1, 5, 2, 2, 6]
+Scores for the roll: 25
+Scores for the turn: 100
+
+Adaptive decides to stop and bank 100 points
+Total score: 215
+
+
+Copycat turn:
+The roll: [5, 5, 1, 4, 4, 3]
+Scores for the roll: 20
+Scores for the turn: 20
+
+The roll: [6, 6, 5]
+Scores for the roll: 5
+Scores for the turn: 25
+
+The roll: [2, 2]
+ZONK! There is no a single scoring-dice
+
+
+CURRENT STATE FOR ROUND 2:
+Conservative: 75 points (consecutive zonks: 0)
+Aggressive: 0 points (consecutive zonks: 2)
+Super_aggressive: 270 points (consecutive zonks: 0)
+Adaptive: 215 points (consecutive zonks: 0)
+Copycat: 60 points (consecutive zonks: 1)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROUND 3
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Conservative turn:
+The roll: [1, 4, 5, 3, 1, 1]
+Scores for the roll: 105
+Scores for the turn: 105
+
+Conservative decides to stop and bank 105 points
+Total score: 180
+
+
+Aggressive turn:
+The roll: [3, 2, 4, 6, 2, 4]
+ZONK! There is no a single scoring-dice
+THREE CONSECUTIVE ZONKS! Penalty: -100 points
+
+
+Super_aggressive turn:
+The roll: [2, 4, 5, 6, 1, 6]
+Scores for the roll: 15
+Scores for the turn: 15
+
+The roll: [5, 3, 5, 5]
+Scores for the roll: 50
+Scores for the turn: 65
+
+The roll: [6]
+ZONK! There is no a single scoring-dice
+
+
+Adaptive turn:
+The roll: [4, 1, 4, 6, 3, 1]
+Scores for the roll: 20
+Scores for the turn: 20
+
+The roll: [6, 1, 2, 4]
+Scores for the roll: 10
+Scores for the turn: 30
+
+The roll: [2, 2, 4]
+ZONK! There is no a single scoring-dice
+
+
+Copycat turn:
+The roll: [4, 4, 4, 2, 5, 4]
+Scores for the roll: 85
+Scores for the turn: 85
+
+The roll: [6]
+ZONK! There is no a single scoring-dice
+
+
+CURRENT STATE FOR ROUND 3:
+Conservative: 180 points (consecutive zonks: 0)
+Aggressive: 0 points (consecutive zonks: 0)
+Super_aggressive: 270 points (consecutive zonks: 1)
+Adaptive: 215 points (consecutive zonks: 1)
+Copycat: 60 points (consecutive zonks: 2)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROUND 4
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Conservative turn:
+The roll: [3, 4, 2, 5, 1, 3]
+Scores for the roll: 15
+Scores for the turn: 15
+
+The roll: [4, 5, 5, 4]
+Scores for the roll: 10
+Scores for the turn: 25
+
+The roll: [6, 6]
+ZONK! There is no a single scoring-dice
+
+
+Aggressive turn:
+The roll: [6, 5, 6, 2, 6, 5]
+Scores for the roll: 70
+Scores for the turn: 70
+
+The roll: [2]
+ZONK! There is no a single scoring-dice
+
+
+Super_aggressive turn:
+The roll: [3, 6, 3, 5, 6, 4]
+Scores for the roll: 5
+Scores for the turn: 5
+
+The roll: [1, 4, 5, 4, 6]
+Scores for the roll: 15
+Scores for the turn: 20
+
+The roll: [1, 3, 5]
+Scores for the roll: 15
+Scores for the turn: 35
+
+The roll: [3]
+ZONK! There is no a single scoring-dice
+
+
+Adaptive turn:
+The roll: [2, 4, 5, 1, 4, 1]
+Scores for the roll: 25
+Scores for the turn: 25
+
+The roll: [2, 5, 5]
+Scores for the roll: 10
+Scores for the turn: 35
+
+The roll: [1]
+Scores for the roll: 10
+Scores for the turn: 45
+
+HOT HAND! All dices are scoring-dices; you can roll 6 dices again
+Adaptive decides to take some risk and rolls all 6 dices again
+The roll: [3, 1, 1, 2, 1, 1]
+Scores for the roll: 200
+Scores for the turn: 245
+
+Adaptive decides to stop and bank 245 points
+Total score: 460
+
+
+Copycat turn:
+The roll: [5, 2, 4, 6, 6, 4]
+Scores for the roll: 5
+Scores for the turn: 5
+
+The roll: [1, 5, 4, 3, 3]
+Scores for the roll: 15
+Scores for the turn: 20
+
+The roll: [6, 4, 4]
+ZONK! There is no a single scoring-dice
+THREE CONSECUTIVE ZONKS! Penalty: -100 points
+
+
+CURRENT STATE FOR ROUND 4:
+Conservative: 180 points (consecutive zonks: 1)
+Aggressive: 0 points (consecutive zonks: 1)
+Super_aggressive: 270 points (consecutive zonks: 2)
+Adaptive: 460 points (consecutive zonks: 0)
+Copycat: 0 points (consecutive zonks: 0)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROUND 5
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Conservative turn:
+The roll: [6, 5, 5, 6, 6, 3]
+Scores for the roll: 70
+Scores for the turn: 70
+
+Conservative decides to stop and bank 70 points
+Total score: 250
+
+
+Aggressive turn:
+The roll: [5, 4, 5, 3, 6, 2]
+Scores for the roll: 10
+Scores for the turn: 10
+
+The roll: [6, 3, 1, 6]
+Scores for the roll: 10
+Scores for the turn: 20
+
+The roll: [6, 5, 1]
+Scores for the roll: 15
+Scores for the turn: 35
+
+The roll: [1]
+Scores for the roll: 10
+Scores for the turn: 45
+
+HOT HAND! All dices are scoring-dices; you can roll 6 dices again
+Aggressive decides to take some risk and rolls all 6 dices again
+The roll: [4, 5, 3, 2, 2, 3]
+Scores for the roll: 5
+Scores for the turn: 50
+
+The roll: [3, 6, 3, 2, 1]
+Scores for the roll: 10
+Scores for the turn: 60
+
+The roll: [6, 2, 1, 6]
+Scores for the roll: 10
+Scores for the turn: 70
+
+The roll: [6, 5, 3]
+Scores for the roll: 5
+Scores for the turn: 75
+
+The roll: [3, 3]
+ZONK! There is no a single scoring-dice
+
+
+Super_aggressive turn:
+The roll: [4, 6, 4, 5, 6, 1]
+Scores for the roll: 15
+Scores for the turn: 15
+
+The roll: [5, 4, 3, 1]
+Scores for the roll: 15
+Scores for the turn: 30
+
+The roll: [2, 5]
+Scores for the roll: 5
+Scores for the turn: 35
+
+The roll: [6]
+ZONK! There is no a single scoring-dice
+THREE CONSECUTIVE ZONKS! Penalty: -100 points
+
+
+Adaptive turn:
+The roll: [4, 5, 6, 1, 1, 1]
+Scores for the roll: 105
+Scores for the turn: 105
+
+The roll: [6, 5]
+Scores for the roll: 5
+Scores for the turn: 110
+
+The roll: [5]
+Scores for the roll: 5
+Scores for the turn: 115
+
+HOT HAND! All dices are scoring-dices; you can roll 6 dices again
+Adaptive decides to take some risk and rolls all 6 dices again
+The roll: [6, 1, 3, 2, 1, 5]
+Scores for the roll: 25
+Scores for the turn: 140
+
+The roll: [2, 1, 3]
+Scores for the roll: 10
+Scores for the turn: 150
+
+Adaptive decides to stop and bank 150 points
+Total score: 610
+
+Adaptive achieves 500 points! THE FINAL ROUND!
+
+
+Copycat turn:
+The roll: [3, 1, 3, 4, 6, 5]
+Scores for the roll: 15
+Scores for the turn: 15
+
+The roll: [2, 2, 6, 6]
+ZONK! There is no a single scoring-dice
+
+
+CURRENT STATE FOR ROUND 5:
+Conservative: 250 points (consecutive zonks: 0)
+Aggressive: 0 points (consecutive zonks: 2)
+Super_aggressive: 170 points (consecutive zonks: 0)
+Adaptive: 610 points (consecutive zonks: 0)
+Copycat: 0 points (consecutive zonks: 1)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+THE WINNER: Adaptive with 610 points!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -74,7 +74,7 @@ def test_add_player():
 
     assert len(game.players) == 1
     assert game.players[0] == player
-    assert player._game_ == game
+    assert player.game == game
 
 
 def test_win_conditions_target_score():

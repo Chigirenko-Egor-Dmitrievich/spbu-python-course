@@ -17,7 +17,7 @@ def test_player_initialization():
     assert player.total_score == 0
     assert player.consecutive_zonks == 0
     assert player.is_active == True
-    assert player._game_ is None
+    assert player.game is None
 
 
 def test_player_set_game():
@@ -30,7 +30,7 @@ def test_player_set_game():
 
     game = SimpleGame()
     player.set_game(game)
-    assert player._game_ == game
+    assert player.game == game
 
 
 def test_player_zonk_management():
@@ -125,22 +125,22 @@ def test_game_phase_detection():
             self.config = type("Config", (), {"max_rounds": max_rounds})()
 
     # Test early phase
-    bot._game_ = SimpleGame(5)  # 25% of 20 rounds
+    bot.game = SimpleGame(5)  # 25% of 20 rounds
     phase = strategy.get_game_phase()
     assert phase == GamePhase.EARLY
 
     # Test middle phase
-    bot._game_ = SimpleGame(10)  # 50% of 20 rounds
+    bot.game = SimpleGame(10)  # 50% of 20 rounds
     phase = strategy.get_game_phase()
     assert phase == GamePhase.MIDDLE
 
     # Test late phase
-    bot._game_ = SimpleGame(18)  # 90% of 20 rounds
+    bot.game = SimpleGame(18)  # 90% of 20 rounds
     phase = strategy.get_game_phase()
     assert phase == GamePhase.LATE
 
     # Test no game case
-    bot._game_ = None
+    bot.game = None
     phase = strategy.get_game_phase()
     assert phase == GamePhase.MIDDLE
 
@@ -162,7 +162,7 @@ def test_conservative_strategy_decisions():
             self.final_round: bool = False
             self.players: list["Player"] = [bot]
 
-    bot._game_ = SimpleGame()
+    bot.game = SimpleGame()
 
     result_low_score = strategy.conservative_strategy(20, 6)
     result_high_score = strategy.conservative_strategy(100, 3)
@@ -187,7 +187,7 @@ def test_aggressive_strategy_decisions():
             self.final_round: bool = False
             self.players: list["Player"] = [bot]
 
-    bot._game_ = SimpleGame()
+    bot.game = SimpleGame()
 
     result_low_score = strategy.aggressive_strategy(50, 3)
     result_high_score = strategy.aggressive_strategy(300, 3)
@@ -215,15 +215,15 @@ def test_adaptive_strategy_phase_changes():
             self.players: list["Player"] = [bot]
 
     # Test early phase (should use conservative)
-    bot._game_ = SimpleGame(2)
+    bot.game = SimpleGame(2)
     early_result = strategy.adaptive_strategy(50, 3)
 
     # Test middle phase (should use aggressive)
-    bot._game_ = SimpleGame(10)
+    bot.game = SimpleGame(10)
     middle_result = strategy.adaptive_strategy(50, 3)
 
     # Test late phase (should use super aggressive)
-    bot._game_ = SimpleGame(18)
+    bot.game = SimpleGame(18)
     late_result = strategy.adaptive_strategy(50, 3)
 
     assert early_result == True
@@ -260,7 +260,7 @@ def test_copycat_strategy_phase_changes():
                 aggressive_bot,
             ]
 
-    copycat_bot._game_ = SimpleGame()
+    copycat_bot.game = SimpleGame()
 
     conservative_result = conservative_strategy.conservative_strategy(200, 2)
     aggressive_result = aggressive_strategy.aggressive_strategy(100, 2)

@@ -28,7 +28,7 @@ class Player(ABC):
         self.total_score: int = 0
         self.consecutive_zonks: int = 0
         self.is_active: bool = True
-        self._game_: Optional["Game"] = None
+        self.game: Optional["Game"] = None
 
     def set_game(self, game: "Game") -> None:
         """
@@ -38,7 +38,7 @@ class Player(ABC):
             game: The game instance this player belongs to
         """
 
-        self._game_ = game
+        self.game = game
 
     @abstractmethod
     def make_decision(self, current_turn_score: int, remaining_dice: int) -> bool:
@@ -121,16 +121,16 @@ class Human(Player):
                     return True
                 elif choice in ["н", "нет", "n", "no"]:
 
-                    if self._game_ is None:
+                    if self.game is None:
                         # Default behavior if game is not set
                         return current_turn_score < 30
 
                     # Checking for minimum score before banking
-                    if current_turn_score >= self._game_.config.min_score_to_bank:
+                    if current_turn_score >= self.game.config.min_score_to_bank:
                         return False
                     else:
                         print(
-                            f"You can't stop now! You need at least {self._game_.config.min_score_to_bank} points, your current score is {current_turn_score} points"
+                            f"You can't stop now! You need at least {self.game.config.min_score_to_bank} points, your current score is {current_turn_score} points"
                         )
                         continue
                 else:
@@ -226,10 +226,10 @@ class Strategy:
             Current game phase (EARLY, MIDDLE, or LATE)
         """
 
-        if not self.bot._game_:
+        if not self.bot.game:
             return GamePhase.MIDDLE
-        total_rounds: int = self.bot._game_.config.max_rounds
-        current_round: int = self.bot._game_.current_round
+        total_rounds: int = self.bot.game.config.max_rounds
+        current_round: int = self.bot.game.current_round
 
         if current_round <= total_rounds * 0.3:
             return GamePhase.EARLY
@@ -246,12 +246,12 @@ class Strategy:
             True if bot is behind leader by more than 3x minimum bank score
         """
 
-        if not self.bot._game_ or len(self.bot._game_.players) <= 1:
+        if not self.bot.game or len(self.bot.game.players) <= 1:
             return False
 
-        min_score: int = self.bot._game_.config.min_score_to_bank
+        min_score: int = self.bot.game.config.min_score_to_bank
         max_score: int = max(
-            p.total_score for p in self.bot._game_.players if p != self.bot
+            p.total_score for p in self.bot.game.players if p != self.bot
         )
         return self.bot.total_score < max_score - min_score * 3
 
@@ -263,12 +263,12 @@ class Strategy:
             True if bot is behind leader by more than 10x minimum bank score
         """
 
-        if not self.bot._game_ or len(self.bot._game_.players) <= 1:
+        if not self.bot.game or len(self.bot.game.players) <= 1:
             return False
 
-        min_score: int = self.bot._game_.config.min_score_to_bank
+        min_score: int = self.bot.game.config.min_score_to_bank
         max_score: int = max(
-            p.total_score for p in self.bot._game_.players if p != self.bot
+            p.total_score for p in self.bot.game.players if p != self.bot
         )
         return self.bot.total_score < max_score - min_score * 10
 
@@ -290,7 +290,7 @@ class Strategy:
         game_phase: GamePhase = self.get_game_phase()
         is_behind: bool = self.is_behind_leader()
         min_score: int = (
-            30 if self.bot._game_ is None else self.bot._game_.config.min_score_to_bank
+            30 if self.bot.game is None else self.bot.game.config.min_score_to_bank
         )
 
         if remaining_dice == 6 and current_turn_score <= min_score * 6:
@@ -326,7 +326,7 @@ class Strategy:
         is_behind: bool = self.is_behind_leader()
         is_far_behind: bool = self.is_far_behind_leader()
         min_score: int = (
-            30 if self.bot._game_ is None else self.bot._game_.config.min_score_to_bank
+            30 if self.bot.game is None else self.bot.game.config.min_score_to_bank
         )
 
         if remaining_dice == 6:
@@ -366,7 +366,7 @@ class Strategy:
         game_phase: GamePhase = self.get_game_phase()
         is_far_behind: bool = self.is_far_behind_leader()
         min_score: int = (
-            30 if self.bot._game_ is None else self.bot._game_.config.min_score_to_bank
+            30 if self.bot.game is None else self.bot.game.config.min_score_to_bank
         )
 
         if remaining_dice == 6:
@@ -419,13 +419,13 @@ class Strategy:
             True to continue rolling, False to bank points
         """
 
-        if not self.bot._game_:
+        if not self.bot.game:
             return self.conservative_strategy(current_turn_score, remaining_dice)
 
         # Finding the most successful players
         successful_players = [
             p
-            for p in self.bot._game_.players
+            for p in self.bot.game.players
             if p != self.bot and p.total_score > self.bot.total_score
         ]
 

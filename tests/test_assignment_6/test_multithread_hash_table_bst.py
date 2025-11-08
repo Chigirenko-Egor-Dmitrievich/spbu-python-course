@@ -143,7 +143,6 @@ def test_keys_items_values_views_or_snapshots(empty_table: ThreadSafeHashTable) 
         assert len(values_list) == len(table)
 
 
-# @pytest.mark.skipif(os.getenv("RUN_STRESS", "0") != "1", reason="Stress test skipped unless RUN_STRESS=1")
 def test_full_stress_5m_operations():
     """
     Optional stress test: 5,000,000 operations with a high read ratio.

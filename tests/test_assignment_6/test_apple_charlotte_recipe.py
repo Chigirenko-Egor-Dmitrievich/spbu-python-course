@@ -1,6 +1,11 @@
 import pytest
 
 
+@pytest.fixture
+def _():
+    pass
+
+
 def test_apple_charlotte_recipe():
     ingredients = {
         0: "sunflower oil",

@@ -1,11 +1,6 @@
 import pytest
 
 
-@pytest.fixture
-def _():
-    pass
-
-
 def test_apple_charlotte_recipe():
     ingredients = {
         0: "sunflower oil",
@@ -34,7 +29,7 @@ def test_apple_charlotte_recipe():
         print(f"{num}: {ingredient}")
     print()
 
-    print("Actions:\n")
+    print("Actions:")
     for step, line in recipe_lines.items():
         print(f"{step}: {line}")
 

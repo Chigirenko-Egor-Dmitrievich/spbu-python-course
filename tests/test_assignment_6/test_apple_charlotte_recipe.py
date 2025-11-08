@@ -24,12 +24,11 @@ def test_apple_charlotte_recipe():
         "Step 5": "Run a knife around the springform pan, release springform, and flip apple Charlotte onto a plate. Immediately flip the cake onto a serving platter.",
     }
 
-    print("Ingredients:")
+    print("\nIngredients:")
     for num, ingredient in ingredients.items():
         print(f"{num}: {ingredient}")
-    print()
 
-    print("Actions:")
+    print("\nActions:")
     for step, line in recipe_lines.items():
         print(f"{step}: {line}")
 

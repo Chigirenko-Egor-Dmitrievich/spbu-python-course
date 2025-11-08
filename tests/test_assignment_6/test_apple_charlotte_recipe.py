@@ -28,7 +28,7 @@ def test_apple_charlotte_recipe():
     for num, ingredient in ingredients.items():
         print(f"{num}: {ingredient}")
 
-    print("\nActions:")
+    print("\n\nActions:")
     for step, line in recipe_lines.items():
         print(f"{step}: {line}")
 

@@ -12,7 +12,7 @@ Classes:
 """
 
 from collections.abc import MutableMapping
-from typing import Generator, Any, Optional, Iterator, Tuple, List
+from typing import Generator, Any, Optional, List
 
 
 class BSTNode:
@@ -24,7 +24,8 @@ class BSTNode:
 
         Args:
             key: The key used for ordering in the BST
-            value: The value associated with the key"""
+            value: The value associated with the key
+        """
 
         self.key: Any = key
         self.value: Any = value
